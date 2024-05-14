@@ -4,7 +4,6 @@ export const useStyles = () => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
     padding: '20px',
   }
 });
