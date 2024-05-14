@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(EnforceResponseHeaders::class);
         $middleware->append(RemoveSensitiveHeaders::class);
+        $middleware->validateCsrfTokens(except: ['parse-csv']);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
