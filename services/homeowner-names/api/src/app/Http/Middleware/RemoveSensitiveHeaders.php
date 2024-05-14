@@ -6,8 +6,13 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnforceResponseHeaders
+class RemoveSensitiveHeaders
 {
+    const SENSITIVE_HEADERS = [
+        'X-Powered-By',
+        'server',
+    ];
+
     /**
      * Handle an incoming request.
      *
@@ -15,8 +20,12 @@ class EnforceResponseHeaders
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $request->headers->set('Accept', 'application/json');
+        $response = $next($request);
 
-        return $next($request);
+        foreach (self::SENSITIVE_HEADERS as $header) {
+            $response->headers->remove($header);
+        }
+
+        return $response;
     }
 }
