@@ -1,4 +1,4 @@
-import Grid from './components/StakcLayout';
+import Grid from './components/StackLayout';
 
 const App = () => (
   <Grid>

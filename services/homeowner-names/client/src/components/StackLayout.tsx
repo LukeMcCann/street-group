@@ -5,7 +5,7 @@ interface StaticLayoutProps {
   children: React.ReactNode;
 }
 
-const StaticLayout = ({
+const StackLayout = ({
   children,
 }: StaticLayoutProps) => {
   const classes = useStyles();
@@ -21,4 +21,4 @@ const StaticLayout = ({
   );
 }
 
-export default StaticLayout;
+export default StackLayout;
