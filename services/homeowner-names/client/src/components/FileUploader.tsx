@@ -3,7 +3,9 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { useStyles } from './FileUploader.style';
 import { useState } from 'react';
+import axios from 'axios';
 
+const PARSING_ENDPOINT = 'http://localhost:8081/parse-csv';
 const ACCEPTED_FORMATS = ['.csv'];
 
 const FileUploader = () => {
@@ -27,13 +29,27 @@ const FileUploader = () => {
     }
   };
 
-  const handleFileUpload = () => {
+  const handleFileUpload = async () => {
     if (!file) {
       alert(`Please select a file to upload. Accepted Formats: ${ACCEPTED_FORMATS.join(',')}.`);
       return;
     }
 
-    // TODO: Send API Request using Axios
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await axios.post(PARSING_ENDPOINT, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while uploading the file.');
+    }
   };
 
   return (
