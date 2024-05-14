@@ -1,19 +1,23 @@
+import { useState } from 'react';
+import axios from 'axios';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { useStyles } from './FileUploader.style';
-import { useState } from 'react';
-import axios from 'axios';
 
 const PARSING_ENDPOINT = 'http://localhost:8081/parse-csv';
 const ACCEPTED_FORMATS = ['.csv'];
 
-const FileUploader = () => {
-  const classes = useStyles();
+interface FileUploaderProps {
+  onUploadResponse: (response: any) => void;
+  onUploadStart: () => void;
+}
 
+const FileUploader: React.FC<FileUploaderProps> = ({ onUploadStart, onUploadResponse }) => {
+  const classes = useStyles();
   const [file, setFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileToUpload = event.target.files?.[0];
 
     if (fileToUpload) {
@@ -35,6 +39,8 @@ const FileUploader = () => {
       return;
     }
 
+    onUploadStart();
+    
     try {
       const formData = new FormData();
       formData.append('file', file);
@@ -45,7 +51,8 @@ const FileUploader = () => {
         },
       });
 
-      console.log('Response:', response.data);
+      console.log({ data: response.data });
+      onUploadResponse(response.data);
     } catch (error) {
       console.error('Error:', error);
       alert('An error occurred while uploading the file.');
@@ -64,15 +71,11 @@ const FileUploader = () => {
           id="file-upload"
           onChange={handleFileChange}
           type="file"
-          variant='outlined'
+          variant="outlined"
         />
       </Grid>
       <Grid item>
-        <Button
-          onClick={handleFileUpload}
-          variant="contained"
-          color="success"
-        >
+        <Button onClick={handleFileUpload} variant="contained" color="success">
           Parse
         </Button>
       </Grid>
