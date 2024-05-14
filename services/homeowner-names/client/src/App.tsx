@@ -1,9 +1,14 @@
-import Grid from './components/StackLayout';
+import StackLayout from './components/StackLayout';
+import FileUploader from './components/FileUploader';
+import Box from '@mui/material/Box';
 
 const App = () => (
-  <Grid>
-    Content
-  </Grid>
+  <StackLayout>
+    <Box component='h1' sx={{ padding: 2 }} >
+      Homeowner Name Service
+    </Box>
+    <FileUploader />
+  </StackLayout>
 );
 
 export default App

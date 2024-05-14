@@ -1,4 +1,5 @@
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import { useStyles } from './StackLayout.style';
 
 interface StaticLayoutProps {
@@ -13,9 +14,9 @@ const StackLayout = ({
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <div style={classes.container}>
+        <Box sx={classes.container}>
           {children}
-        </div>
+        </Box>
       </Grid>
     </Grid>
   );
