@@ -2,11 +2,14 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { useStyles } from './FileUploader.style';
+import { useState } from 'react';
 
 const ACCEPTED_FORMATS = ['.csv'];
 
 const FileUploader = () => {
   const classes = useStyles();
+
+  const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
     const fileToUpload = event.target.files?.[0];
@@ -19,9 +22,18 @@ const FileUploader = () => {
         event.target.value = '';
         return;
       } else {
-        alert('Handling Valid File');
+        setFile(fileToUpload);
       }
     }
+  };
+
+  const handleFileUpload = () => {
+    if (!file) {
+      alert(`Please select a file to upload. Accepted Formats: ${ACCEPTED_FORMATS.join(',')}.`);
+      return;
+    }
+
+    // TODO: Send API Request using Axios
   };
 
   return (
@@ -34,13 +46,17 @@ const FileUploader = () => {
             accept: ACCEPTED_FORMATS,
           }}
           id="file-upload"
-          onChange={(e) => handleFileChange(e)}
+          onChange={handleFileChange}
           type="file"
           variant='outlined'
         />
       </Grid>
       <Grid item>
-        <Button variant="contained" color="success">
+        <Button
+          onClick={handleFileUpload}
+          variant="contained"
+          color="success"
+        >
           Parse
         </Button>
       </Grid>
