@@ -1,3 +1,9 @@
-const App = () => <div>App</div>
+import Grid from './components/StakcLayout';
+
+const App = () => (
+  <Grid>
+    Content
+  </Grid>
+);
 
 export default App
