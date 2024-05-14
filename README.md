@@ -30,10 +30,6 @@ Some issues I ran into here included:
   - This is still and issue, it appears to be something with the config of Nginx and Laravel 11 but I didn't want to spend too much time debugging it, the issue occurs on the main port: `localhost:8080/api/`
   when trying to call any route other than the index Laravel has trouble routing to the file. This works fine on the Development route `localhost:8081'` and so I have used this to enable the application to work for now. If I were to continue this project I would be looking to resolve this such that I can hide the dev access ports from public and have all network requests operating on the internal docker network. This is a common practice I usually do as it is more secure and less prone to breaches and data leaks even when mistakes are made as everything is hidden behind an internal docker network.
 
-<p align="center">
-    <img width="%" src="./images/street-group.png">
-</p>
-
 ## Resources
 
 All resources used in this project are open source. The containers
