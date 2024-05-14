@@ -8,7 +8,7 @@ const FileUploader = () => {
 
   return (
     <Grid container spacing={2} justifyContent="center">
-      <Grid item xs={12} sm={6} md={4}> {/* Adjust grid item size as needed */}
+      <Grid item xs={12} sm={6} md={4}>
         <TextField
           inputProps={classes.textfield}
           id="file-upload"
