@@ -17,6 +17,10 @@ within Laravel storage. In a real application I would have opted for a NoSQL DB 
 implementation (something like MongoDB as a document store) as the data would have suited that format well
 being parsed into a JSON object and not being very relational in it's nature.
 
+I included PHPUnit tests on the backend, should I have used a database I would have usually included PGTap tests if utilising Postgres. When building the a Client I would usually use React Testing Library to test the components as well as accessibility, but thought this to be out of scope for this project given that the focus is on the API functionality.
+
+I made some decisions on the Client side, for instance, in App.tsx I use inline styles, this again, is for simplicity, usually I would split components into separate files but since I am using MUI I did not see the need to in this case. If this were to grow and become more complex I would split the data rendering section in App.tsx into its own component and use a stylesheet to style the component as I have with the others.
+
 Some issues I ran into here included:
 - CORS
   - Due to running each service as it's own modular microservice CORS
@@ -25,6 +29,10 @@ Some issues I ran into here included:
 - PHP Rewrite
   - This is still and issue, it appears to be something with the config of Nginx and Laravel 11 but I didn't want to spend too much time debugging it, the issue occurs on the main port: `localhost:8080/api/`
   when trying to call any route other than the index Laravel has trouble routing to the file. This works fine on the Development route `localhost:8081'` and so I have used this to enable the application to work for now. If I were to continue this project I would be looking to resolve this such that I can hide the dev access ports from public and have all network requests operating on the internal docker network. This is a common practice I usually do as it is more secure and less prone to breaches and data leaks even when mistakes are made as everything is hidden behind an internal docker network.
+
+<p align="center">
+    <img width="%" src="./images/street-group.png">
+</p>
 
 ## Resources
 
